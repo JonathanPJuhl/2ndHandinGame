@@ -12,7 +12,7 @@ public class DropdownHandler : MonoBehaviour
     public Button submitGameMode;
     public GameObject player;
     public Canvas canvas;
-    
+
     void Start()
     {
         List<string> mapItems = new List<string>();
