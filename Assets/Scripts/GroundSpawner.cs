@@ -8,7 +8,8 @@ public class GroundSpawner : MonoBehaviour
     public GameObject woodenBox;
     public int mapSize;
     public int boxFrequency;
-    public Canvas canvas;
+    //public Canvas canvas;
+    //public Canvas canvas;
     Vector3 SpawnPoint;
 
     public void SpawnMap(string mapSize, string amountOfBoxes)
@@ -40,7 +41,7 @@ public class GroundSpawner : MonoBehaviour
             boxHigh = 4;
         }
 
-        canvas.enabled = false;
+        //canvas.enabled = false;
         SpawnPlane(mapSizeInt, boxLow, boxHigh);
 
     }
