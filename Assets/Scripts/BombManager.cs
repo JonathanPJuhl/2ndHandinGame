@@ -21,7 +21,7 @@ public class BombManager : MonoBehaviour
     }
     void Explode()
     {
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        // Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
         StartCoroutine(CreateExplosions(Vector3.forward, 5));
         StartCoroutine(CreateExplosions(Vector3.right, 5));
@@ -32,56 +32,37 @@ public class BombManager : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         exploded = true;
         // transform.Find("Collider").gameObject.SetActive(false);
-        Destroy(gameObject, .3f); 
+         
 
     }
 
     private IEnumerator CreateExplosions(Vector3 direction, int size)
     {
-        for (int i = 1; i < size; i++)
+        Destroy(gameObject);
+        for(int i = 1; i <= size; i++)
         {
-            RaycastHit hit;
-            float thickness = 1f;
-            Vector3 origin = transform.position;
-            origin.y = 0.5f;
-            Debug.DrawRay(transform.position + new Vector3(0, .5f, 0), direction*i, Color.red, 10);
-            Instantiate(explosionPrefab, transform.position + direction * i,
-               Quaternion.identity);
-            if (Physics.SphereCast(origin, thickness, direction, out hit, i, levelMask, QueryTriggerInteraction.UseGlobal))
+            Instantiate(explosionPrefab, transform.position + direction * i, Quaternion.identity);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position + direction + new Vector3(0, .5f, 0), 0.5f);
+
+            foreach (var hitCollider in hitColliders)
             {
-
-                if (hit.collider)
+                Debug.Log(hitCollider);
+                if(hitCollider.name.Equals("MetalBox(Clone)"))
                 {
-                    if (hit.collider.tag.Equals("Player"))
-                    {
-                        //Player.takeDamage
-                    }
-                    if (hit.collider.tag.Equals("Wood"))
-                    {
-
-                        Debug.Log(hit.transform.gameObject);
-                        Destroy(hit.transform.gameObject);
-                    }
-
+                    hitColliders = null;
+                } 
+                if (hitCollider.name.Equals("Wooden(Clone)") && counter == 0)
+                {
+                    Debug.Log("DESTROYED");
+                    Destroy(hitCollider.gameObject);
                 }
 
             }
+            counter = 0;
 
-
-            // Debug.Log(counter += 1);
-            //Instantiate(explosionPrefab, transform.position, 
-            // Quaternion.identity);
-
-
-
-
-            else
-            {
-                break;
-            }
-
-            yield return new WaitForSeconds(.05f);
         }
+       
+            yield return new WaitForSeconds(.05f);
 
     }
 
