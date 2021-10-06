@@ -10,7 +10,9 @@ public class DropdownHandler : MonoBehaviour
     private string mapSize;
     private string amountOfBoxes;
     public Button submitGameMode;
-    
+    public GameObject player;
+    public Canvas canvas;
+
     void Start()
     {
         List<string> mapItems = new List<string>();
@@ -58,10 +60,12 @@ public class DropdownHandler : MonoBehaviour
         {
             return;
         }
-        else
+        else 
         {
             GroundSpawner groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+            Instantiate(player);
             groundSpawner.SpawnMap(mapSize, amountOfBoxes);
+            GameObject.Destroy(canvas.gameObject);
         }
 
     }

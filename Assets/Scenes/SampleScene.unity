@@ -158,6 +158,8 @@ MonoBehaviour:
   mapSizeDropdown: {fileID: 1205976875}
   amountOfBoxesDropdown: {fileID: 1248699303}
   submitGameMode: {fileID: 2035041423}
+  player: {fileID: 6946355472098428011, guid: 11e0301f7da254a439b2eb401e9bd3d8, type: 3}
+  canvas: {fileID: 37730930}
 --- !u!114 &37730928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1693,7 +1695,6 @@ MonoBehaviour:
   woodenBox: {fileID: 9091857997395499785, guid: 7adc73f03e75b794abc45692a74080b5, type: 3}
   mapSize: 5
   boxFrequency: 10
-  canvas: {fileID: 37730930}
 --- !u!4 &1260777253
 Transform:
   m_ObjectHideFlags: 0
