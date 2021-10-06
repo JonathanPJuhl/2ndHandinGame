@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1192942378697517644}
   - component: {fileID: 5965144822398901837}
   - component: {fileID: 2144046666753876715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 6946355472098428010}
   - component: {fileID: 6946355472098428006}
   - component: {fileID: 6946355472098428001}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerCath
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +178,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombPrefab: {fileID: 5887486010538058435, guid: ad39c5960c7650b4bb9fb859c04e1a3b, type: 3}
+  snapBomb: {fileID: 6734020189625527792, guid: b7bb2da152639fa4897159f276209f0c, type: 3}
 --- !u!54 &6946355472098428001
 Rigidbody:
   m_ObjectHideFlags: 0

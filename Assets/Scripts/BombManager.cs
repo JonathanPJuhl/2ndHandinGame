@@ -7,6 +7,7 @@ public class BombManager : MonoBehaviour
     public GameObject explosionPrefab;
     public LayerMask levelMask;
     private bool exploded = false;
+    int counter = 0;
 
     void Start()
     {
@@ -22,34 +23,60 @@ public class BombManager : MonoBehaviour
     {
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-        StartCoroutine(CreateExplosions(Vector3.forward));
-        StartCoroutine(CreateExplosions(Vector3.right));
-        StartCoroutine(CreateExplosions(Vector3.back));
-        StartCoroutine(CreateExplosions(Vector3.left));
+        StartCoroutine(CreateExplosions(Vector3.forward, 5));
+        StartCoroutine(CreateExplosions(Vector3.right, 5));
+        StartCoroutine(CreateExplosions(Vector3.back, 5));
+        StartCoroutine(CreateExplosions(Vector3.left, 5));
 
 
         GetComponent<MeshRenderer>().enabled = false;
-        exploded = true; 
-        transform.Find("Collider").gameObject.SetActive(false);
+        exploded = true;
+        // transform.Find("Collider").gameObject.SetActive(false);
         Destroy(gameObject, .3f); 
 
     }
 
-    private IEnumerator CreateExplosions(Vector3 direction)
+    private IEnumerator CreateExplosions(Vector3 direction, int size)
     {
-        for (int i = 1; i < 3; i++)
+        for (int i = 1; i < size; i++)
         {
             RaycastHit hit;
-            Physics.Raycast(transform.position + new Vector3(0, .5f, 0), direction, out hit,
-              i, levelMask);
-
-            if (!hit.collider)
+            float thickness = 1f;
+            Vector3 origin = transform.position;
+            origin.y = 0.5f;
+            Debug.DrawRay(transform.position + new Vector3(0, .5f, 0), direction*i, Color.red, 10);
+            Instantiate(explosionPrefab, transform.position + direction * i,
+               Quaternion.identity);
+            if (Physics.SphereCast(origin, thickness, direction, out hit, i, levelMask, QueryTriggerInteraction.UseGlobal))
             {
-                Instantiate(explosionPrefab, transform.position + (i * direction), 
-                  explosionPrefab.transform.rotation);
+
+                if (hit.collider)
+                {
+                    if (hit.collider.tag.Equals("Player"))
+                    {
+                        //Player.takeDamage
+                    }
+                    if (hit.collider.tag.Equals("Wood"))
+                    {
+
+                        Debug.Log(hit.transform.gameObject);
+                        Destroy(hit.transform.gameObject);
+                    }
+
+                }
+
             }
+
+
+            // Debug.Log(counter += 1);
+            //Instantiate(explosionPrefab, transform.position, 
+            // Quaternion.identity);
+
+
+
+
             else
-            { 
+            {
                 break;
             }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CathrinePlayer : MonoBehaviour
 {
     public GameObject bombPrefab;
+    public GameObject snapBomb;
 
     
     private CharacterController controller;
@@ -53,9 +54,14 @@ public class CathrinePlayer : MonoBehaviour
 
     private void DropBomb()
     {
-            Instantiate(bombPrefab, new Vector3(Mathf.RoundToInt(transform.position.x),
-                0.5f, Mathf.RoundToInt(transform.position.z)),
-                bombPrefab.transform.rotation);
+        Vector3 gridSize = new Vector3(0.5f, 0f, 0.5f);
+        var position = new Vector3(
+                 Mathf.RoundToInt(this.transform.position.x / gridSize.x) * gridSize.x,
+                 Mathf.RoundToInt(this.transform.position.y / gridSize.y) * gridSize.y,
+                 Mathf.RoundToInt(this.transform.position.z/ gridSize.z) * gridSize.z
+                 );
+        position.y = 0.5f;
+        Instantiate(snapBomb, position, Quaternion.identity);
 
     }
 }
